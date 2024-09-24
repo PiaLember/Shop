@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shop.Core.Dto
+﻿namespace Shop.Models.Spaceships
 {
-    public class SpaceshipDto
+    public class SpaceshipCreateUpdateViewModel
     {
         public Guid? Id { get; set; }
         public string Name { get; set; }

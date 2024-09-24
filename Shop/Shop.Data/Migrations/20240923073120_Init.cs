@@ -18,7 +18,7 @@ namespace Shop.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Typename = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SpaceshipMpdel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SpaceshipModel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BuiltDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Crew = table.Column<int>(type: "int", nullable: false),
                     EnginePower = table.Column<int>(type: "int", nullable: false),

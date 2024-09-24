@@ -50,7 +50,7 @@ namespace Shop.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpaceshipMpdel")
+                    b.Property<string>("SpaceshipModel")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
