@@ -62,7 +62,15 @@ namespace Shop.Controllers
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                FileToApiDtos = vm.Image
+                    .Select(x => new FileToApiDto
+                        {
+                            Id = x.ImageId,
+                            ExistingFilePath = x.FilePath,
+                            SpaceshipId = x.SpaceshipId
+                         }).ToArray()
             };
             var result = await _spaceshipsServices.Create(dto);
             if (result == null)
