@@ -51,5 +51,14 @@ namespace Shop.ApplicationServices.Services
             await _context.SaveChangesAsync();
             return kindergarten;
         }
+        public async Task<Kindergarten> Delete(Guid id)
+        {
+            var kindergartenId = await _context.Kindergartens
+                .FirstOrDefaultAsync(x=> x.Id == id);
+            _context.Kindergartens.Remove(kindergartenId);
+            await _context.SaveChangesAsync();
+            return kindergartenId;
+
+        }
     }
 }
