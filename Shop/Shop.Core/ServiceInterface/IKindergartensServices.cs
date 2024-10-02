@@ -9,5 +9,6 @@ namespace Shop.Core.ServiceInterface
     {
         Task<Kindergarten> Create(KindergartenDto dto);
         Task<Kindergarten> DetailsAsync(Guid id);
+        Task<Kindergarten> Update(KindergartenDto dto);
     }
 }
