@@ -1,12 +1,8 @@
 ﻿using Shop.Data;
 using Shop.Core.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Shop.Core.Domain;
 using Shop.Core.ServiceInterface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Shop.ApplicationServices.Services
 {
@@ -32,6 +28,13 @@ namespace Shop.ApplicationServices.Services
             await _context.Kindergartens.AddAsync(kindergarten);
             await _context.SaveChangesAsync();
             return kindergarten;
+        }
+        public async Task<Kindergarten> DetailsAsync(Guid id)
+        {
+            var result = await _context.Kindergartens
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
         }
     }
 }
