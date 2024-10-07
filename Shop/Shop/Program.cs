@@ -10,8 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
+builder.Services.AddScoped<IKindergartensServices, KindergartensServices>();
 builder.Services.AddScoped<IFileServices, FileSrevices>();
 builder.Services.AddScoped<IRealEstatesServices, RealEstatesServices>();
+
 
 builder.Services.AddDbContext<ShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
