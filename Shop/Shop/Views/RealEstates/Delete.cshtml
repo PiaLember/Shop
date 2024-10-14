@@ -1,7 +1,6 @@
-﻿@model Shop.Models.RealEstates.RealEstateDetailsViewModel
-
+﻿@model Shop.Models.RealEstates.RealEstateDeleteViewModel
 <div class="taust">
-    <h1>Details</h1>
+    <h1>Delete</h1>
 
     <div>
         <h4>RealEstates</h4>
@@ -13,13 +12,13 @@
             </div>
 
             <div class="form-group row">
-                <label asp-for="Size" class="col-sm-2 col-form-label"></label>
-                @Html.DisplayFor(model => model.Size)
+                <label asp-for="Location" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Location)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Location" class="col-sm-2 col-form-label"></label>
-                @Html.DisplayFor(model => model.Location)
+                <label asp-for="Size" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.Size)
             </div>
 
             <div class="form-group row">
@@ -41,13 +40,17 @@
                 <label asp-for="UpdatedAt" class="col-sm-2 col-form-label"></label>
                 @Html.DisplayFor(model => model.UpdatedAt)
             </div>
-
-            @foreach (var images in Model.Image)
-            {
-                <partial name="_Images" model="images" />
-            }
-
         </dl>
-        <a asp-action="Index" asp-controller="realestates" class="btn btn-danger">Back</a>
+
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+        }
+
+        <form asp-action="DeleteConfirmation">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <a asp-action="Index" asp-controller="realestates" class="btn btn-success">Back</a>
+        </form>
     </div>
 </div>

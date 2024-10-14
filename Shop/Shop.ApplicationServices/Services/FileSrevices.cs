@@ -92,5 +92,63 @@ namespace Shop.ApplicationServices.Services
 
             return null;
         }
+
+        public void UploadFilesToDatabase(RealEstateDto dto, RealEstate domain)
+        {
+
+            if (dto.Files != null && dto.Files.Count > 0)
+            {
+
+                foreach (var image in dto.Files)
+                {
+                    using (var target = new MemoryStream())
+                    {
+                        FileToDatabase files = new FileToDatabase()
+                        {
+                            Id = Guid.NewGuid(),
+                            ImageTitle = image.FileName,
+                            RealEstateId = domain.Id
+                        };
+
+                        image.CopyTo(target);
+                        files.ImageData = target.ToArray();
+
+                        _context.FileToDatabases.Add(files);
+                    }
+                }
+            }
+        }
+
+        public async Task<FileToDatabase> RemoveFileFromDatabase(FileToDatabaseDto dto)
+        {
+            var imageId = await _context.FileToDatabases
+                .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync();
+
+           
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+            
+
+            return imageId;
+        }
+
+        public async Task<FileToDatabase> RemoveFilesFromDatabase(FileToDatabaseDto[] dtos)
+        {
+            foreach(var dto in dtos)
+            {
+                var imageId = await _context.FileToDatabases
+                .Where(x => x.Id == dto.Id)
+                .FirstOrDefaultAsync();
+
+
+                _context.FileToDatabases.Remove(imageId);
+                await _context.SaveChangesAsync();
+            }
+            
+
+
+            return null;
+        }
     }
 }

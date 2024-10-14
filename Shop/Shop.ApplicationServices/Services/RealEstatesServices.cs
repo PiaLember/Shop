@@ -39,6 +39,11 @@ namespace Shop.ApplicationServices.Services
             realestate.CreatedAt = DateTime.Now;
             realestate.UpdatedAt = DateTime.Now;
 
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, realestate);
+            }
+
 
             await _context.RealEstates.AddAsync(realestate);
             await _context.SaveChangesAsync();
@@ -51,6 +56,54 @@ namespace Shop.ApplicationServices.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return result;
+        }
+
+        public async Task<RealEstate> Update(RealEstateDto dto)
+        {
+            RealEstate realestate = new();
+
+            realestate.Id = dto.Id;
+            realestate.Location = dto.Location;
+            realestate.Size = dto.Size;
+            realestate.RoomNumber = dto.RoomNumber;
+            realestate.BuildingType = dto.BuildingType;
+            realestate.CreatedAt = dto.CreatedAt;
+            realestate.UpdatedAt = DateTime.Now;
+
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, realestate);
+            }
+
+
+            _context.RealEstates.Update(realestate);
+            await _context.SaveChangesAsync();
+
+            return realestate;
+        }
+
+        public async Task<RealEstate> Delete(Guid id)
+        {
+            var realestateId = await _context.RealEstates
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            var images = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new FileToDatabaseDto
+                {
+                    Id = y.Id,
+                    ImageTitle = y.ImageTitle,
+                    RealEstateId = y.RealEstateId
+                }
+                ).ToArrayAsync();
+                
+            await _fileServices.RemoveFilesFromDatabase(images);
+
+            _context.RealEstates.Remove(realestateId);
+            await _context.SaveChangesAsync();
+
+
+            return realestateId;
         }
 
     }
