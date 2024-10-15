@@ -20,7 +20,7 @@ namespace Shop.ApplicationServices.Services
             kindergarten.Id = Guid.NewGuid();
             kindergarten.KindergartenName = dto.KindergartenName;
             kindergarten.GroupName = dto.GroupName;
-            kindergarten.ChildrenCount = dto.ChildrenCount;
+            kindergarten.ChildrenCount = (int)dto.ChildrenCount;
             kindergarten.Teacher = dto.Teacher;
             kindergarten.CreatedAt = DateTime.Now;
             kindergarten.UpdatedAt = DateTime.Now;
@@ -42,7 +42,7 @@ namespace Shop.ApplicationServices.Services
             kindergarten.Id = dto.Id;
             kindergarten.KindergartenName = dto.KindergartenName;
             kindergarten.GroupName = dto.GroupName;
-            kindergarten.ChildrenCount = dto.ChildrenCount;
+            kindergarten.ChildrenCount = (int)dto.ChildrenCount;
             kindergarten.Teacher = dto.Teacher;
             kindergarten.CreatedAt = dto.CreatedAt;
             kindergarten.UpdatedAt = DateTime.Now;

@@ -29,6 +29,9 @@ namespace Shop.ApplicationServices.Services
 
         public void FilesToApi(SpaceshipDto dto, Spaceship spaceship)
         {
+            if (dto.Files != null && dto.Files.Count > 0)
+            {
+            
             if(!Directory.Exists(_webHost.ContentRootPath + "\\multipleFileUpload\\"))
             {
                 Directory.CreateDirectory(_webHost.ContentRootPath + "\\multipleFileUpload\\");
@@ -52,6 +55,7 @@ namespace Shop.ApplicationServices.Services
 
                     _context.FileToApis.AddAsync(path);
                 }
+            }
             }
         }
 

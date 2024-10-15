@@ -39,8 +39,8 @@ namespace Shop.ApplicationServices.Services
             domain.Typename = dto.Typename;
             domain.SpaceshipModel = dto.SpaceshipModel;
             domain.BuiltDate = dto.BuiltDate;
-            domain.Crew = dto.Crew;
-            domain.EnginePower = dto.EnginePower;
+            domain.Crew = (int)dto.Crew;
+            domain.EnginePower = (int)dto.EnginePower;
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = DateTime.Now;
             _fileServices.FilesToApi(dto, domain);
@@ -60,8 +60,8 @@ namespace Shop.ApplicationServices.Services
             spaceship.Typename = dto.Typename;
             spaceship.SpaceshipModel= dto.SpaceshipModel;
             spaceship.BuiltDate = dto.BuiltDate;
-            spaceship.Crew = dto.Crew;
-            spaceship.EnginePower = dto.EnginePower;
+            spaceship.Crew = (int)dto.Crew;
+            spaceship.EnginePower = (int)dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
             _fileServices.FilesToApi(dto, spaceship);

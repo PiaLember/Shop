@@ -32,9 +32,9 @@ namespace Shop.ApplicationServices.Services
 
             realestate.Id = Guid.NewGuid();
             
-            realestate.Size = dto.Size;
+            realestate.Size = (double)dto.Size;
             realestate.Location = dto.Location;
-            realestate.RoomNumber = dto.RoomNumber;
+            realestate.RoomNumber = (int)dto.RoomNumber;
             realestate.BuildingType = dto.BuildingType;
             realestate.CreatedAt = DateTime.Now;
             realestate.UpdatedAt = DateTime.Now;
@@ -64,8 +64,8 @@ namespace Shop.ApplicationServices.Services
 
             realestate.Id = dto.Id;
             realestate.Location = dto.Location;
-            realestate.Size = dto.Size;
-            realestate.RoomNumber = dto.RoomNumber;
+            realestate.Size = (double)dto.Size;
+            realestate.RoomNumber = (int)dto.RoomNumber;
             realestate.BuildingType = dto.BuildingType;
             realestate.CreatedAt = dto.CreatedAt;
             realestate.UpdatedAt = DateTime.Now;

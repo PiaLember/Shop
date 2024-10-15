@@ -98,7 +98,7 @@ namespace Shop.Controllers
                .Select(y => new RealEstateImageViewModel
                {
                    RealEstateId = y.Id,
-                   ImageId = y.Id,
+                   ImageId = (Guid)y.Id,
                    ImageData = y.ImageData,
                    ImageTitle = y.ImageTitle,
                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
@@ -170,7 +170,7 @@ namespace Shop.Controllers
                 .Select(y => new RealEstateImageViewModel
                 {
                     RealEstateId = y.Id,
-                    ImageId = y.Id,
+                    ImageId = (Guid)y.Id,
                     ImageData = y.ImageData,
                     ImageTitle = y.ImageTitle,
                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
@@ -205,7 +205,7 @@ namespace Shop.Controllers
               .Select(y => new RealEstateImageViewModel
               {
                   RealEstateId = y.Id,
-                  ImageId = y.Id,
+                  ImageId = (Guid)y.Id,
                   ImageData = y.ImageData,
                   ImageTitle = y.ImageTitle,
                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
