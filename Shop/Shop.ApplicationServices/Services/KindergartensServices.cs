@@ -9,10 +9,12 @@ namespace Shop.ApplicationServices.Services
    public class KindergartensServices : IKindergartensServices
     {
         private readonly ShopContext _context;
+        private readonly IFileServices _fileServices;
         public KindergartensServices
-            (ShopContext context)
+            (ShopContext context, IFileServices fileServices)
         {
             _context = context;
+            _fileServices = fileServices;
         }
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
@@ -24,6 +26,11 @@ namespace Shop.ApplicationServices.Services
             kindergarten.Teacher = dto.Teacher;
             kindergarten.CreatedAt = DateTime.Now;
             kindergarten.UpdatedAt = DateTime.Now;
+
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, kindergarten);
+            }
 
             await _context.Kindergartens.AddAsync(kindergarten);
             await _context.SaveChangesAsync();
@@ -46,6 +53,10 @@ namespace Shop.ApplicationServices.Services
             kindergarten.Teacher = dto.Teacher;
             kindergarten.CreatedAt = dto.CreatedAt;
             kindergarten.UpdatedAt = DateTime.Now;
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, kindergarten);
+            }
 
             _context.Kindergartens.Update(kindergarten);
             await _context.SaveChangesAsync();
@@ -55,6 +66,18 @@ namespace Shop.ApplicationServices.Services
         {
             var kindergartenId = await _context.Kindergartens
                 .FirstOrDefaultAsync(x=> x.Id == id);
+
+            var images = await _context.FileToDatabases
+                .Where(x => x.KindergartenId == id)
+                .Select(y => new FileToDatabaseDto
+                {
+                    Id = y.Id,
+                    ImageTitle = y.ImageTitle,
+                    KindergartenId = y.KindergartenId
+                }
+                ).ToArrayAsync();
+            await _fileServices.RemoveFilesFromDatabase(images);
+
             _context.Kindergartens.Remove(kindergartenId);
             await _context.SaveChangesAsync();
             return kindergartenId;

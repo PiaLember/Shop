@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shop.Core.Dto;
 using Shop.Core.ServiceInterface;
 using Shop.Data;
@@ -11,16 +12,19 @@ namespace Shop.Controllers
     {
         private readonly ShopContext _context;
         private readonly IKindergartensServices _kindergartenServices;
+        private readonly IFileServices _fileServices;
 
         public KindergartensController
             (
                 ShopContext context,
-                IKindergartensServices kindergartensServices
+                IKindergartensServices kindergartensServices,
+                IFileServices fileServices
 
             )
         {
             _context = context;
             _kindergartenServices = kindergartensServices;
+            _fileServices = fileServices;
         }
         public IActionResult Index()
         {
@@ -51,7 +55,16 @@ namespace Shop.Controllers
                 ChildrenCount = vm.ChildrenCount,
                 Teacher = vm.Teacher,
                 CreatedAt = vm.CreatedAt,
-                UpdatedAt = vm.UpdatedAt
+                UpdatedAt = vm.UpdatedAt,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        KindergartenId = x.KindergartenId
+                    }).ToArray()
             };
             var result = await _kindergartenServices.Create(dto);
             if (result == null)
@@ -70,6 +83,17 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToDatabases
+                .Where(x => x.KindergartenId == id)
+                .Select(y => new KindergartenImageViewModel
+                {
+                    KindergartenId = y.Id,
+                    ImageId = (Guid)y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new KindergartenDetailsViewModel();
 
             vm.Id = kindergarten.Id;
@@ -79,6 +103,7 @@ namespace Shop.Controllers
             vm.Teacher = kindergarten.Teacher;
             vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
+            vm.Image.AddRange(images);
 
 
             return View(vm);
@@ -94,6 +119,17 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
+            var images = await _context.FileToDatabases
+                .Where(x => x.KindergartenId == id)
+                .Select(y => new KindergartenImageViewModel
+                {
+                    KindergartenId = y.Id,
+                    ImageId = (Guid)y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new KindergartenCreateUpdateViewModel();
 
             vm.Id = kindergarten.Id;
@@ -103,6 +139,7 @@ namespace Shop.Controllers
             vm.Teacher = kindergarten.Teacher;
             vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
+            vm.Image.AddRange(images);
 
 
             return View("CreateUpdate", vm);
@@ -118,7 +155,16 @@ namespace Shop.Controllers
                 ChildrenCount = vm.ChildrenCount,
                 Teacher = vm.Teacher,
                 CreatedAt = vm.CreatedAt,
-                UpdatedAt = vm.UpdatedAt
+                UpdatedAt = vm.UpdatedAt,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        KindergartenId = x.KindergartenId,
+                    }).ToArray()
             };
             var result = await _kindergartenServices.Update(dto);
             if (result == null)
@@ -135,6 +181,17 @@ namespace Shop.Controllers
             {
                 return NotFound();
             }
+            var images = await _context.FileToDatabases
+               .Where(x => x.KindergartenId == id)
+               .Select(y => new KindergartenImageViewModel
+               {
+                   KindergartenId = y.Id,
+                   ImageId = (Guid)y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+               }).ToArrayAsync();
+
             var vm = new KindergartenDeleteViewModel();
             vm.Id = kindergarten.Id;
             vm.KindergartenName = kindergarten.KindergartenName;
@@ -143,6 +200,8 @@ namespace Shop.Controllers
             vm.Teacher = kindergarten.Teacher;
             vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
+            vm.Image.AddRange(images);
+
             return View(vm);
         }
         [HttpPost]
@@ -150,6 +209,23 @@ namespace Shop.Controllers
         {
             var kindergartenId = await _kindergartenServices.Delete(id);
             if (kindergartenId == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(KindergartenImageViewModel vm)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                Id = vm.ImageId
+            };
+
+            var image = await _fileServices.RemoveFileFromDatabase(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
