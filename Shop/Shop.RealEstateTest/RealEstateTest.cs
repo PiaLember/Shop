@@ -4,7 +4,7 @@ using Shop.Core.ServiceInterface;
 
 namespace Shop.RealEstateTest
 {
-    public class RealEstateTest
+    public class RealEstateTest :TestBase
     {
         [Fact]
         public async Task ShouldNot_AddEmptyRealEstate_WhenReturnResult()
@@ -18,9 +18,9 @@ namespace Shop.RealEstateTest
             dto.BuildingType = "asd";
             dto.CreatedAt = DateTime.Now;
             dto.UpdatedAt = DateTime.Now;
-
+            //Act
             var result = await Svc<IRealEstatesServices>().Create(dto);
-
+            //Assert
             Assert.NotNull(result);
         }
     }
