@@ -1,6 +1,10 @@
 ﻿@model Shop.Models.Kindergartens.KindergartenImageViewModel
 
-<div class="form-group row col-sm-4 offset-2">
-    <div>@Model.ImageTitle </div>
-    <img class="card-img-top" src="@Model.Image" asp-append-version="true" />
-</div>
+<form>
+    <div class="row">
+        <div class="col">
+            <div style="display: none;">@Model.ImageTitle </div>
+            <img class="image" src="@Model.Image" asp-append-version="true" />
+        </div>
+    </div>
+</form>

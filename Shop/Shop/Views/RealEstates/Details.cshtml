@@ -4,41 +4,41 @@
     <h1>Details</h1>
 
     <div>
-        <h4>RealEstates</h4>
+        <h4>Real Estates</h4>
         <hr />
         <dl class="row">
             <div class="form-group row">
-                <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Id" class="col-sm-2">Id:</label>
                 @Html.DisplayFor(model => model.Id)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Size" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Size" class="col-sm-2">Size:</label>
                 @Html.DisplayFor(model => model.Size)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Location" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Location" class="col-sm-2">Location:</label>
                 @Html.DisplayFor(model => model.Location)
             </div>
 
             <div class="form-group row">
-                <label asp-for="RoomNumber" class="col-sm-2 col-form-label"></label>
+                <label asp-for="RoomNumber" class="col-sm-2">Rooms:</label>
                 @Html.DisplayFor(model => model.RoomNumber)
             </div>
 
             <div class="form-group row">
-                <label asp-for="BuildingType" class="col-sm-2 col-form-label"></label>
+                <label asp-for="BuildingType" class="col-sm-2">Building Type:</label>
                 @Html.DisplayFor(model => model.BuildingType)
             </div>
 
             <div class="form-group row">
-                <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="CreatedAt" class="col-sm-2">Created At:</label>
                 @Html.DisplayFor(model => model.CreatedAt)
             </div>
 
             <div class="form-group row">
-                <label asp-for="UpdatedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="UpdatedAt" class="col-sm-2">Updated At:</label>
                 @Html.DisplayFor(model => model.UpdatedAt)
             </div>
 
@@ -48,6 +48,6 @@
             }
 
         </dl>
-        <a asp-action="Index" asp-controller="realestates" class="btn btn-danger">Back</a>
+        <a asp-action="Index" asp-controller="realestates" class="btn button-back">Back</a>
     </div>
 </div>

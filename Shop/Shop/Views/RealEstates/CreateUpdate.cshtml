@@ -47,34 +47,41 @@ else
             <div class="col-sm-5">
                 <div class="custom-file">
                     <input class="form-control custom-file-input" asp-for="Files" multiple type="file" />
-                    <label class="custom-file-label">Choose file...</label>
                 </div>
             </div>
         </div>
-        <hr />
+        @if (Model.Id.HasValue)
+        {
+            <hr />
+        }
 
-        <div class="form-group row">
+        <div class="container">
+        <div class="row">
 
             @foreach (var images in Model.Image)
             {
+                <div class="col-sm">
                 <partial name="_Images" model="images" />
+                
                 <input asp-action="removeImage" asp-controller="realestates" asp-route-imageId="@images.ImageId" type="submit"
-                       class="btn btn-danger" value="Remove Image"  />
+                       class="btn btn-outline-danger" value="Remove Image" />
+                </div>
             }
+        </div>
         </div>
 
         <hr />
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="update" asp-controller="realEstates" type="submit" class="btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="realEstates" type="submit" class="btn button-update" value="Update" />
         }
         else
         {
-            <input asp-action="create" asp-controller="realEstates" type="submit" class="btn btn-primary" value="Create" />
+            <input asp-action="create" asp-controller="realEstates" type="submit" class="btn button-update" value="Create" />
         }
 
-        <a asp-action="Index" asp-controller="realEstates" class="btn btn-danger">Back</a>
+        <a asp-action="Index" asp-controller="realEstates" class="btn button-back">Back</a>
     </form>
 </div>
 

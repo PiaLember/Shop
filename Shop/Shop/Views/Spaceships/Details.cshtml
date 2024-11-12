@@ -8,55 +8,55 @@
         <hr />
         <dl class="row">
             <div class="form-group row">
-                <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Id" class="col-sm-2">Id:</label>
                 @Html.DisplayFor(model => model.Id)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Name" class="col-sm-2">Name:</label>
                 @Html.DisplayFor(model => model.Name)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Typename" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Typename" class="col-sm-2">Typename:</label>
                 @Html.DisplayFor(model => model.Typename)
             </div>
 
             <div class="form-group row">
-                <label asp-for="SpaceshipModel" class="col-sm-2 col-form-label"></label>
+                <label asp-for="SpaceshipModel" class="col-sm-2">Spaceship Model:</label>
                 @Html.DisplayFor(model => model.SpaceshipModel)
             </div>
 
             <div class="form-group row">
-                <label asp-for="BuiltDate" class="col-sm-2 col-form-label"></label>
+                <label asp-for="BuiltDate" class="col-sm-2">Built Date:</label>
                 @Html.DisplayFor(model => model.BuiltDate)
             </div>
 
             <div class="form-group row">
-                <label asp-for="Crew" class="col-sm-2 col-form-label"></label>
+                <label asp-for="Crew" class="col-sm-2">Crew:</label>
                 @Html.DisplayFor(model => model.Crew)
             </div>
 
             <div class="form-group row">
-                <label asp-for="EnginePower" class="col-sm-2 col-form-label"></label>
+                <label asp-for="EnginePower" class="col-sm-2">Engine Power:</label>
                 @Html.DisplayFor(model => model.EnginePower)
             </div>
 
             <div class="form-group row">
-                <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="CreatedAt" class="col-sm-2">Created At:</label>
                 @Html.DisplayFor(model => model.CreatedAt)
             </div>
 
             <div class="form-group row">
-                <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
+                <label asp-for="ModifiedAt" class="col-sm-2">Modified At:</label>
                 @Html.DisplayFor(model => model.ModifiedAt)
             </div>
 
             @foreach (var images in Model.Image)
             {
-                <partial name="_images" model="images" />
+                <partial name="_Images" model="images" />
             }
         </dl>
-        <a asp-action="Index" asp-controller="spaceships" class="btn btn-danger">Back</a>
+        <a asp-action="Index" asp-controller="spaceships" class="btn button-back">Back</a>
     </div>
 </div>

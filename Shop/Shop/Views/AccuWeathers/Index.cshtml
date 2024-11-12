@@ -1,0 +1,22 @@
+﻿@model Shop.Models.AccuWeathers.IndexViewModel
+
+<div class="taust">
+    <div class="container" style="width: 80%">
+        <form method="post" class="form-group row">
+            <div class="container">
+                <div>
+                    <h1>AccuWeather Forecast</h1>
+                    <h3>Search the city</h3>
+                    <label asp-for="City" style="font-family: Arial"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>              
+            </div>
+            <div class="container">
+                <div>
+                    <button asp-controller="AccuWeathers" asp-action="City" class="btn button-details">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

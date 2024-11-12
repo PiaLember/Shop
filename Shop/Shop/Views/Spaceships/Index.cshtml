@@ -3,8 +3,8 @@
     @{
         int rownumber = 1;
     }
-    <div>
-        <a asp-action="create" asp-controller="Spaceships" type="submit" class="btn btn-primary">Create</a>
+    <div id="create">
+    <a asp-action="create" asp-controller="Spaceships" type="submit" class="btn button-update">Create</a>
     </div>
 
 
@@ -22,22 +22,23 @@
                     <th scope="col">Built date</th>
                     <th scope="col">Crew</th>
                     <th scope="col"></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var spaceships in Model)
                 {
                     <tr>
-                        <td>@rownumber</td>
-                        <td>@spaceships.Name</td>
-                        <td>@spaceships.Typename</td>
-                        <td>@spaceships.BuiltDate</td>
-                        <td>@spaceships.Crew</td>
+                            <td>@rownumber</td>
+                            <td>@spaceships.Name</td>
+                            <td>@spaceships.Typename</td>
+                            <td>@spaceships.BuiltDate</td>
+                            <td>@spaceships.Crew</td>                        
                         <td>
-                            <a asp-action="details" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-info">Details</a>
-                            <a asp-action="update" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-primary">Update</a>
+                           <div id="buttons">
+                            <a asp-action="details" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn button-details">Details</a>
+                            <a asp-action="update" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn button-update">Update</a>
                             <a asp-action="delete" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-outline-danger">Delete</a>
+                           </div>
                         </td>
                     </tr>
 

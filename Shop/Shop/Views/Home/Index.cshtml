@@ -2,7 +2,35 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+<section class="hero-section">
+    <div class="card-grid">
+        <a asp-controller="Spaceships" asp-action="Index" class="card">
+            <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/space-travel-collage-design_23-2150163738.jpg?t=st=1730451487~exp=1730455087~hmac=12de11e73d11770a1d1d62419ba813ab59b8c34c07f29a91e45414ccb43ed7da&w=996)"></div>
+            <div class="card__content">
+                <p class="card__category">Spaceships</p>
+            </div>
+        </a>
+        <a class="card" asp-controller="RealEstates" asp-action="Index">
+            <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/night-city-background-with-reflection_1092-12.jpg?t=st=1730451721~exp=1730455321~hmac=c2ec26820c71db5d954119821ea18934351492c116460be0ef21528dab73e409&w=740)"></div>
+            <div class="card__content">
+                <p class="card__category">Real Estates</p>
+            </div>
+        </a>
+        <a class="card" asp-controller="Kindergartens" asp-action="Index">
+            <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/balloon-twist-shaped-like-giraffe_23-2151625290.jpg?t=st=1730456267~exp=1730459867~hmac=4ffcd0b877c740406afece5de8df96f976c41a782e827275ebd1b8022907d747&w=996)"></div>
+            <div class="card__content">
+                <p class="card__category">Kindergaten</p>
+            </div>
+            </a>
+        <a class="card" asp-controller="AccuWeathers" asp-action="Index">
+            <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/flat-design-monsoon-season-clouds-illustration_23-2149424294.jpg?t=st=1730808925~exp=1730812525~hmac=8629e4c113eba099f1814f5dd177f93bc8892f207b23cd8e96e0177e8c31bb35&w=996)"></div>
+            <div class="card__content">
+                <p class="card__category">Weather</p>
+            </div>
+        </a>
+
+    </div>
+</section>
+

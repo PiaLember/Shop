@@ -1,0 +1,19 @@
+﻿@model Shop.Models.AccuWeathers.AccuWeatherViewModel
+
+<div class="taust">
+    <div class="container">
+        <h2>Current conditions in @Html.DisplayFor(model => model.City)</h2>
+        <ul class="features">
+
+            <li>
+                <label>Temperature:</label>
+                <span>@Model.Minimum °C</span>
+            </li>
+            
+    </div>
+
+    <div class="container">
+        <form method="get">
+            <button asp-action="Index" asp-controller="AccuWeathers" class="btn btn-success">Back</button>
+        </form>
+    </div>

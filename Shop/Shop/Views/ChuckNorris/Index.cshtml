@@ -1,0 +1,48 @@
+﻿@model Shop.Models.ChuckNorris.ChuckNorrisViewModel
+
+<div class="chuck">
+    <div class="joke">
+        <h2>@Html.DisplayFor(model => model.Categories)</h2>
+        <hr />
+        <dl class="row">
+            @*  <div class="form-group row">
+            <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+
+            <div class="form-group row">
+            <label asp-for="IconUrl" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.IconUrl)
+            </div>
+
+            <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Id)
+            </div>
+
+            <div class="form-group row">
+            <label asp-for="UpdatedAt" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.UpdatedAt)
+            </div>
+
+            <div class="form-group row">
+            <label asp-for="Url" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Url)
+            </div> *@
+
+            <div class="form-group row">
+                @Html.DisplayFor(model => model.Value)
+            </div>
+        </dl>
+    </div>
+    <div class="new-joke">
+        <form method="post">
+            <div class="joke">
+                <div class="form-group">
+                    <button asp-controller="chuckNorris" asp-action="searchChuckNorrisJokes" class="button">New Chuck Norris joke</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
