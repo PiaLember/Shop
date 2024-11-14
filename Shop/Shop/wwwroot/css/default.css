@@ -840,25 +840,6 @@ label {
 					text-decoration: underline;
 				}		
 	
-	/*#two-column
-	{
-		padding-top: 3em;
-	}*/
-
-	/*#two-column .box1
-	{
-		float: left;
-		width: 320px;
-		border-right: 1px solid rgba(0,0,0,.1);
-	}
-
-	#two-column .box2
-	{
-		float: right;
-		width: 300px;
-	}*/
-
-/*cards*/
 
 
 :root {
@@ -978,8 +959,9 @@ body {
 }
 
 
-/*Chuck Norris
-*/
+/*********************************************************************************/
+/* Chuck Norris                                                                     */
+/*********************************************************************************/
 
 .chuck {
 	text-align: center;
@@ -999,4 +981,38 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 }
-	
+
+/*********************************************************************************/
+/* Pagination                                                                     */
+/*********************************************************************************/
+.pagination > li{
+	margin: 0px 10px 0px 10px;
+}
+.pagination > li > a {
+	background-color: #E4C65D;
+	color: #E33C26;
+}
+
+	.pagination > li > a:focus,
+	.pagination > li > a:hover,
+	.pagination > li > span:focus,
+	.pagination > li > span:hover {
+		color: #5a5a5a;
+		background-color: #E85D4B;
+		border-color: #E33C26;
+	}
+
+.pagination > .active > a {
+	color: white;
+	background-color: #E33C26 !Important;
+	border: solid 1px #E33C26 !Important;
+}
+
+.pagination > .active > a:hover {
+	 background-color: #E33C26 !Important;
+	 border: solid 1px #E33C26;
+}
+
+.pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+	opacity:0.3;
+}

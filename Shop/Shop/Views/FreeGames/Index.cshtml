@@ -26,17 +26,18 @@
 </div>
 
 <form method="get" asp-action="Index">
-    <div class="form-group">
-        <input type="text" name="searchString" value="@currentSearchString" class="form-control" placeholder="Search games by title" />
-        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    <div class="form-group row">
+        <div class="col">
+            <input type="text" name="searchString" value="@currentSearchString" class="form-control" placeholder="Search games by title" />
+        </div>
+        <div class="col">
+            <button type="submit" class="btn button-details">Search</button>
+        </div>
+        
+        
     </div>
 </form>
-@if (!string.IsNullOrEmpty(currentSearchString))
-{
-    <form method="get" asp-action="Index">
-        <button type="submit" class="btn btn-secondary mt-2">Back to Full List</button>
-    </form>
-}
+
 
 <table class="table table-hover">
     <thead>
@@ -102,13 +103,21 @@
         }
     </tbody>
 </table>
+@if (!string.IsNullOrEmpty(currentSearchString))
+{
+    <form method="get" asp-action="Index">
+        <button type="submit" class="btn button-back">Back to Full List</button>
+    </form>
+
+}
 
 @if (totalPages > 1)
 {
     <nav aria-label="Page navigation">
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
             <li class="page-item @(currentPage == 1 ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">Previous</a>
+                <a class="page-link" aria-label="Previous" asp-action="Index" asp-route-pageNumber="@(currentPage - 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">
+                    <span aria-hidden="true">&laquo;</span></a>
             </li>
 
             @for (int i = startPage; i <= endPage; i++)
@@ -119,7 +128,8 @@
             }
 
             <li class="page-item @(currentPage == totalPages ? "disabled" : "")">
-                <a class="page-link" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">Next</a>
+                <a class="page-link" aria-label="Next" asp-action="Index" asp-route-pageNumber="@(currentPage + 1)" asp-route-sortOrder="@currentSortOrder" asp-route-searchString="@currentSearchString">
+                    <span aria-hidden="true">&raquo;</span></a>
             </li>
         </ul>
     </nav>
