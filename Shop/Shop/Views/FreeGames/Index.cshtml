@@ -2,6 +2,7 @@
 
 @{
     int rownumber = 1;
+    var currentSortOrder = ViewContext.HttpContext.Request.Query["sortOrder"].ToString();
 }
 
 
@@ -9,30 +10,67 @@
     Free games to play
 </div>
 
-<form method="post">
-    <table class="table table-hover">
-        <thead>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">
+                Name
+                @if (currentSortOrder == "name_desc")
+                {
+                    <a asp-action="Index" asp-route-sortOrder="name_asc">▲</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-sortOrder="name_desc">▼</a>
+                }
+            </th>
+            <th scope="col">
+                Genre
+                @if (currentSortOrder == "genre_desc")
+                {
+                    <a asp-action="Index" asp-route-sortOrder="genre_asc">▲</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-sortOrder="genre_desc">▼</a>
+                }
+                </th>
+            <th scope="col">
+                Platform
+                @if (currentSortOrder == "platform_desc")
+                {
+                    <a asp-action="Index" asp-route-sortOrder="platform_asc">▲</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-sortOrder="platform_desc">▼</a>
+                }
+                </th>
+            <th scope="col">
+                Release Date
+                @if (currentSortOrder == "release_date_desc")
+                {
+                    <a asp-action="Index" asp-route-sortOrder="release_date_asc">▲</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-sortOrder="release_date_desc">▼</a>
+                }
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var freegames in Model)
+        {
             <tr>
-                <th></th>
-                <th scope="col">Name</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Platform</th>
-                <th scope="col">Realease Date</th>
+                <td>@rownumber</td>
+                <td>@freegames.title</td>
+                <td>@freegames.genre</td>
+                <td>@freegames.platform</td>
+                <td>@freegames.release_date</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var freegames in Model)
-            {
-                <tr>
-                    <td>@rownumber</td>
-                    <td>@freegames.title</td>
-                    <td>@freegames.genre</td>
-                    <td>@freegames.platform</td>
-                    <td>@freegames.release_date</td>
-                </tr>
-
-                rownumber += 1;
-            }
-        </tbody>
-    </table>
-</form>
+            rownumber += 1;
+        }
+    </tbody>
+</table>
