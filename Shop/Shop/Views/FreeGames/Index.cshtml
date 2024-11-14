@@ -3,12 +3,21 @@
 @{
     int rownumber = 1;
     var currentSortOrder = ViewContext.HttpContext.Request.Query["sortOrder"].ToString();
+    var currentSearchString = ViewContext.HttpContext.Request.Query["searchString"].ToString();
+
 }
 
 
 <div class="h1">
     Free games to play
 </div>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <input type="text" name="searchString" value="@currentSearchString" class="form-control" placeholder="Search games by title" />
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </div>
+</form>
 
 <table class="table table-hover">
     <thead>
@@ -18,44 +27,44 @@
                 Name
                 @if (currentSortOrder == "name_desc")
                 {
-                    <a asp-action="Index" asp-route-sortOrder="name_asc">▲</a>
+                    <a asp-action="Index" asp-route-sortOrder="name_asc" asp-route-searchString="@currentSearchString">▲</a>
                 }
                 else
                 {
-                    <a asp-action="Index" asp-route-sortOrder="name_desc">▼</a>
+                    <a asp-action="Index" asp-route-sortOrder="name_desc" asp-route-searchString="@currentSearchString">▼</a>
                 }
             </th>
             <th scope="col">
                 Genre
                 @if (currentSortOrder == "genre_desc")
                 {
-                    <a asp-action="Index" asp-route-sortOrder="genre_asc">▲</a>
+                    <a asp-action="Index" asp-route-sortOrder="genre_asc" asp-route-searchString="@currentSearchString">▲</a>
                 }
                 else
                 {
-                    <a asp-action="Index" asp-route-sortOrder="genre_desc">▼</a>
+                    <a asp-action="Index" asp-route-sortOrder="genre_desc" asp-route-searchString="@currentSearchString">▼</a>
                 }
                 </th>
             <th scope="col">
                 Platform
                 @if (currentSortOrder == "platform_desc")
                 {
-                    <a asp-action="Index" asp-route-sortOrder="platform_asc">▲</a>
+                    <a asp-action="Index" asp-route-sortOrder="platform_asc" asp-route-searchString="@currentSearchString">▲</a>
                 }
                 else
                 {
-                    <a asp-action="Index" asp-route-sortOrder="platform_desc">▼</a>
+                    <a asp-action="Index" asp-route-sortOrder="platform_desc" asp-route-searchString="@currentSearchString">▼</a>
                 }
                 </th>
             <th scope="col">
                 Release Date
                 @if (currentSortOrder == "release_date_desc")
                 {
-                    <a asp-action="Index" asp-route-sortOrder="release_date_asc">▲</a>
+                    <a asp-action="Index" asp-route-sortOrder="release_date_asc" asp-route-searchString="@currentSearchString">▲</a>
                 }
                 else
                 {
-                    <a asp-action="Index" asp-route-sortOrder="release_date_desc">▼</a>
+                    <a asp-action="Index" asp-route-sortOrder="release_date_desc" asp-route-searchString="@currentSearchString">▼</a>
                 }
                 </th>
         </tr>

@@ -16,7 +16,7 @@ namespace Shop.Controllers
         {
             _freeGamesServices = freeGamesServices;
         }
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             FreeGamesResultDto dto = new();
             await _freeGamesServices.FreeGamesResult(dto);
@@ -35,6 +35,14 @@ namespace Shop.Controllers
                 release_date = game.release_date,
                 freetogame_profile_url = game.freetogame_profile_url
             });
+
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                vmList = vmList.Where(g => g.title.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+            }
+
             vmList = sortOrder switch
             {
                 "name_desc" => vmList.OrderByDescending(g => g.title),
@@ -45,7 +53,7 @@ namespace Shop.Controllers
                 "platform_asc" => vmList.OrderBy(g => g.platform),
                 "release_date_desc" => vmList.OrderByDescending(g => g.release_date),
                 "release_date_asc" => vmList.OrderBy(g => g.release_date),
-                _ => vmList.OrderBy(g => g.title)  // Default to name ascending
+                _ => vmList.OrderBy(g => g.title)
             };
 
             return View(vmList.ToList());
