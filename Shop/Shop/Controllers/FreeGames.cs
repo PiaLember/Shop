@@ -2,12 +2,14 @@
 using Shop.Core.Dto.FreeGamesDtos;
 using Shop.Core.ServiceInterface;
 using Shop.Models.FreeGames;
+using System.Linq;
 
 namespace Shop.Controllers
 {
     public class FreeGames : Controller
     {
         private readonly IFreeGamesServices _freeGamesServices;
+        private const int PageSize = 10;
 
         public FreeGames
             (
@@ -16,7 +18,7 @@ namespace Shop.Controllers
         {
             _freeGamesServices = freeGamesServices;
         }
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int pageNumber = 1)
         {
             FreeGamesResultDto dto = new();
             await _freeGamesServices.FreeGamesResult(dto);
@@ -55,6 +57,15 @@ namespace Shop.Controllers
                 "release_date_asc" => vmList.OrderBy(g => g.release_date),
                 _ => vmList.OrderBy(g => g.title)
             };
+
+            int totalItems = vmList.Count();
+            vmList = vmList.Skip((pageNumber - 1) * PageSize).Take(PageSize);
+
+            // Pass pagination data to the view
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / PageSize);
+            ViewBag.CurrentPage = pageNumber;
+            ViewBag.SortOrder = sortOrder;
+            ViewBag.SearchString = searchString;
 
             return View(vmList.ToList());
         }
