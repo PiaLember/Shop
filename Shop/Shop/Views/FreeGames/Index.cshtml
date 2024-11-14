@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Shop.Models.FreeGames.IndexViewModel>
+
+@{
+    int rownumber = 1;
+}
+
+
+<div class="h1">
+    Free games to play
+</div>
+
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th scope="col">Name</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Platform</th>
+                <th scope="col">Realease Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var freegames in Model)
+            {
+                <tr>
+                    <td>@rownumber</td>
+                    <td>@freegames.title</td>
+                    <td>@freegames.genre</td>
+                    <td>@freegames.platform</td>
+                    <td>@freegames.release_date</td>
+                </tr>
+
+                rownumber += 1;
+            }
+        </tbody>
+    </table>
+</form>

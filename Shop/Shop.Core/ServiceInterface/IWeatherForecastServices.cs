@@ -9,6 +9,6 @@ namespace Shop.Core.ServiceInterface
 {
     public interface IWeatherForecastServices
     {
-        Task<AccuWeatherLocationResultDto> AccuWeatherResult(AccuWeatherLocationResultDto dto, WeatherRootDto dto1);
+        Task<AccuWeatherLocationResultDto> WeatherResult(AccuWeatherLocationResultDto dto);
     }
 }

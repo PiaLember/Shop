@@ -22,7 +22,7 @@ namespace Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchCity(AccuSearchCityViewModel model)
+        public IActionResult SearchCity(IndexViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -31,27 +31,47 @@ namespace Shop.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> City(string city)
+        [HttpGet]
+        public IActionResult City(string city)
         {
             AccuWeatherLocationResultDto dto = new();
-            WeatherRootDto dto1 = new();
-
             dto.City = city;
 
-            await _accuWeatherServices.AccuWeatherResult(dto, dto1);
+            _accuWeatherServices.WeatherResult(dto);
+            AccuSearchCityViewModel vm = new();
+            vm.City = dto.City;
+            vm.EffectiveDate = dto.EffectiveDate;
+            vm.EffectiveEpochDate = dto.EffectiveEpochDate;
+            vm.Severity = dto.Severity;
+            vm.Text = dto.Text;
+            vm.Category = dto.Category;
+            vm.EndDate = dto.EndDate;
+            vm.EndEpochDate = dto.EndEpochDate;
+            vm.DailyForecastsDate = dto.DailyForecastsDate;
+            vm.DailyForecastsEpochDate = dto.DailyForecastsEpochDate;
 
-            AccuWeatherViewModel vm = new()
-            {
-                City = dto.City,
-                EffectiveDate = dto.EffectiveDate,
-                EffectiveEpocDate = dto.EffectiveEpochDate,
-                Severity = dto.Severity,
-                Text = dto.Text,
-                Category = dto.Category,
-                EndEpocDate = dto.EndEpochDate,
-                Minimum = dto1.DailyForecasts[0].Temperature.Minimum.Value,
-                Maximum = dto1.DailyForecasts[0].Temperature.Maximum.Value
-            };
+            vm.TempMinValue = dto.TempMinValue;
+            vm.TempMinUnit = dto.TempMinUnit;
+            vm.TempMinUnitType = dto.TempMinUnitType;
+
+            vm.TempMaxValue = dto.TempMaxValue;
+            vm.TempMaxUnit = dto.TempMaxUnit;
+            vm.TempMaxUnitType = dto.TempMaxUnitType;
+
+            vm.DayIcon = dto.DayIcon;
+            vm.DayIconPhrase = dto.DayIconPhrase;
+            vm.DayHasPrecipitation = dto.DayHasPrecipitation;
+            vm.DayPrecipitationType = dto.DayPrecipitationType;
+            vm.DayPrecipitationIntensity = dto.DayPrecipitationIntensity;
+
+            vm.NightIcon = dto.NightIcon;
+            vm.NightIconPhrase = dto.NightIconPhrase;
+            vm.NightHasPrecipitation = dto.NightHasPrecipitation;
+            vm.NightPrecipitationType = dto.NightPrecipitationType;
+            vm.NightPrecipitationIntensity = dto.NightPrecipitationIntensity;
+
+            vm.MobileLink = dto.MobileLink;
+            vm.Link = dto.Link;
 
             return View(vm);
         }

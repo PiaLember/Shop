@@ -1,4 +1,4 @@
-﻿@model Shop.Models.AccuWeathers.AccuWeatherViewModel
+﻿@model Shop.Models.AccuWeathers.AccuSearchCityViewModel
 
 <div class="taust">
     <div class="container">
@@ -7,7 +7,7 @@
 
             <li>
                 <label>Temperature:</label>
-                <span>@Model.Minimum °C</span>
+                <span>@Html.DisplayFor(model => model.TempMinValue) °C</span>
             </li>
             
     </div>
