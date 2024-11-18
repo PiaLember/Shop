@@ -86,7 +86,8 @@
                 {
                     <a asp-action="Index" asp-route-sortOrder="release_date_desc" asp-route-searchString="@currentSearchString">▼</a>
                 }
-                </th>
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -98,6 +99,9 @@
                 <td>@freegames.genre</td>
                 <td>@freegames.platform</td>
                 <td>@freegames.release_date</td>
+                <td>
+                    <img src="@freegames.thumbnail" alt="@freegames.title Thumbnail" style="width: 100px; height: auto;" />
+                </td>
             </tr>
             rownumber += 1;
         }
