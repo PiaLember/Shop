@@ -89,7 +89,7 @@ namespace Shop.Controllers
                 dateModified = result.dateModified
             }).ToList();
 
-            return View(viewModelList); // Pass the list to the view
+            return View(viewModelList);
         }
 
 

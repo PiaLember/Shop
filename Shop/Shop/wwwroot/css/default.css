@@ -895,6 +895,7 @@ body {
 	list-style: none;
 	position: relative;
 	border-radius: 40px 40px;
+	background-color: #E4C65D;
 }
 
 	.card:before {
