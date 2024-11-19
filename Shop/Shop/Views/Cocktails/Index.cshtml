@@ -1,0 +1,109 @@
+﻿@model List<Shop.Models.Cocktails.CocktailsViewModel>
+
+
+<div class="container" style="width: 80%">
+    <h1>Search for a Cocktail</h1>
+
+    <form asp-action="Index" method="get">
+        <div class="form-group">
+            <input type="text" name="SearchCoctail" class="form-control" placeholder="Enter cocktail name" />
+        </div>
+        <button type="submit" class="btn button-details">Search</button>
+    </form>
+
+    @if (Model != null && Model.Any())
+    {
+        foreach (var cocktail in Model)
+        {
+            <div class="row">
+                <h2>@cocktail.strDrink</h2>
+                <div class="col-lg">
+                    <img src="@cocktail.strDrinkThumb" alt="@cocktail.strDrink" class="img-fluid" />
+                </div>
+
+                <div class="col">
+                    <p><strong>Category:</strong> @cocktail.strCategory</p>
+                    <p><strong>Glass:</strong> @cocktail.strGlass</p>
+                    <p><strong>Ingredients & Measures:</strong></p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ingredient</th>
+                                <th>Measure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient1))
+                            {
+                                <tr><td>@cocktail.strIngredient1</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure1) ? "-" : cocktail.strMeasure1)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient2))
+                            {
+                                <tr><td>@cocktail.strIngredient2</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure2) ? "-" : cocktail.strMeasure2)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient3))
+                            {
+                                <tr><td>@cocktail.strIngredient3</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure3) ? "-" : cocktail.strMeasure3)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient4))
+                            {
+                                <tr><td>@cocktail.strIngredient4</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure4) ? "-" : cocktail.strMeasure4)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient5))
+                            {
+                                <tr><td>@cocktail.strIngredient5</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure5) ? "-" : cocktail.strMeasure5)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient6))
+                            {
+                                <tr><td>@cocktail.strIngredient6</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure6) ? "-" : cocktail.strMeasure6)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient7))
+                            {
+                                <tr><td>@cocktail.strIngredient7</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure7) ? "-" : cocktail.strMeasure7)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient8))
+                            {
+                                <tr><td>@cocktail.strIngredient8</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure8) ? "-" : cocktail.strMeasure8)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient9))
+                            {
+                                <tr><td>@cocktail.strIngredient9</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure9) ? "-" : cocktail.strMeasure9)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient10))
+                            {
+                                <tr><td>@cocktail.strIngredient10</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure10) ? "-" : cocktail.strMeasure10)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient11))
+                            {
+                                <tr><td>@cocktail.strIngredient11</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure11) ? "-" : cocktail.strMeasure11)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient12))
+                            {
+                                <tr><td>@cocktail.strIngredient12</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure12) ? "-" : cocktail.strMeasure12)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient13))
+                            {
+                                <tr><td>@cocktail.strIngredient13</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure13) ? "-" : cocktail.strMeasure13)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient14))
+                            {
+                                <tr><td>@cocktail.strIngredient14</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure14) ? "-" : cocktail.strMeasure14)</td></tr>
+                            }
+                            @if (!string.IsNullOrEmpty(cocktail.strIngredient15))
+                            {
+                                <tr><td>@cocktail.strIngredient15</td><td>@(string.IsNullOrEmpty(cocktail.strMeasure15) ? "-" : cocktail.strMeasure15)</td></tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <p><strong>Instructions:</strong> @cocktail.strInstructions</p>
+                </div>
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+        <p>No results found for your search.</p>
+    }
+</div>

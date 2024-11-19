@@ -42,7 +42,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">#</th>
+            <th scope="col"></th>
             <th scope="col">
                 Name
                 @if (currentSortOrder == "name_desc")
@@ -94,7 +94,11 @@
         @foreach (var freegames in Model)
         {
             <tr>
-                <td>@rownumber</td>
+                <td>
+                    <a href="@freegames.game_url" class="btn btn-game" target="_blank">
+                        @(freegames.platform == "PC (Windows), Web Browser" ? "Play Now" : "Download")
+                    </a>
+                </td>
                 <td>@freegames.title</td>
                 <td>@freegames.genre</td>
                 <td>@freegames.platform</td>
