@@ -1,5 +1,19 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Shop.Models.OpenWeathers.SearchViewModel
+
+<div class="container">
+    <form method="post">
+        <div class="row">            
+                <h1>OpenWeather Forecast</h1>
+                <h3>Search the city</h3>
+            <div class="col">
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <button asp-controller="AccuWeathers" asp-action="searchCity" class="btn button-details">Search</button>
+            </div>
+        </div>
+        
+
+    </form>
+</div>
