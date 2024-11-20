@@ -15,5 +15,6 @@ namespace Shop.Core.Dto.OpenWeatherDtos
         public int Pressure { get; set; }
         public double WindSpeed { get; set; }
         public string Conditions { get; set; }
+        public string Icon { get; set; }
     }
 }
