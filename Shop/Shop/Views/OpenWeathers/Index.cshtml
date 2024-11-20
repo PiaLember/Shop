@@ -2,18 +2,16 @@
 
 <div class="container">
     <form method="post">
-        <div class="row">            
-                <h1>OpenWeather Forecast</h1>
+        <h1>OpenWeather Forecast</h1>
+        <div class="container row">                           
                 <h3>Search the city</h3>
             <div class="col">
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="col">
-                <button asp-controller="AccuWeathers" asp-action="searchCity" class="btn button-details">Search</button>
+                <button asp-controller="OpenWeathers" asp-action="searchCity" class="btn button-details">Search</button>
             </div>
-        </div>
-        
-
+        </div>        
     </form>
 </div>

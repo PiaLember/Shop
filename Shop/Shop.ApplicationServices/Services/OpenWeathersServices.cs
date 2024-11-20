@@ -33,7 +33,7 @@ namespace Shop.ApplicationServices.Services
                 dto.Icon = result.weather[0].icon;
             }
 
-            return null;
+            return dto;
         }
     }
 }

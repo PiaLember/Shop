@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Shop.Models.OpenWeathers.OpenWeatherViewModel
+
+
 @{
+    var iconCode = Model.Icon;
+    var iconUrl = "https://openweathermap.org/img/wn/"+iconCode+"@2x.png";
 }
+
+<div class="container row">
+    <h1>@Html.DisplayFor(model => model.City)</h1>
+    <hr />
+    <div class="col">
+        <div class="row">
+            <div class="col-3"><strong>Temperature:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.Temp) °C</div>
+        </div>
+        <div class="row">
+            <div class="col-3"><strong>Feels Like:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.FeelsLike) °C</div>
+        </div>
+        <div class="row">
+            <div class="col-3"><strong>Humidity:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.Humidity) %</div>
+        </div>
+        <div class="row">
+            <div class="col-3"><strong>Pressure:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.Pressure) hPa</div>
+        </div>
+        <div class="row">
+            <div class="col-3"><strong>Wind Speed:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.WindSpeed) m/s</div>
+        </div>
+        <div class="row">
+            <div class="col-3"><strong>Conditions:</strong></div>
+            <div class="col">@Html.DisplayFor(model => model.Conditions)</div>
+        </div>
+    </div>
+    <div class="col">
+        <img src="@iconUrl" class="img-fluid" />
+    </div>
+</div>
+<div class="container">
+    <form method="get">
+        <button asp-action="Index" asp-controller="OpenWeathers" class="btn btn-success">Back to search</button>
+    </form>
+</div>
