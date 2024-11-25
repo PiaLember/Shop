@@ -17,6 +17,7 @@ builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddScoped<IFreeGamesServices, FreeGamesServices>();
 builder.Services.AddScoped<ICocktailsServices, CocktailsServices>();
+builder.Services.AddScoped<IEmailServices, EmailServices>();
 
 
 builder.Services.AddDbContext<ShopContext>(options =>
