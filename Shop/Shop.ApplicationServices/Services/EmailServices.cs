@@ -4,6 +4,8 @@ using Shop.Core.Dto;
 using Shop.Core.ServiceInterface;
 using MailKit.Net.Smtp;
 using static Org.BouncyCastle.Math.EC.ECCurve;
+using System.Net.Mail;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 
 namespace Shop.ApplicationServices.Services
@@ -22,10 +24,22 @@ namespace Shop.ApplicationServices.Services
             email.From.Add(MailboxAddress.Parse(_configuration.GetSection("EmailUserName").Value));
             email.To.Add(MailboxAddress.Parse(dto.To));
             email.Subject = dto.Subject;
-            email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+
+            var bodyBuilder = new BodyBuilder
             {
-                Text = dto.Body
+                HtmlBody = dto.Body
             };
+
+            if (dto.AttachmentPaths != null && dto.AttachmentPaths.Any())
+            {
+                foreach (var path in dto.AttachmentPaths)
+                {
+                    bodyBuilder.Attachments.Add(path);
+                }
+            }
+
+            email.Body = bodyBuilder.ToMessageBody();
+
 
             //kindlasti kasutada mailkit.net.smtp
             using var smtp = new SmtpClient();
@@ -35,5 +49,6 @@ namespace Shop.ApplicationServices.Services
             smtp.Send(email);
             smtp.Disconnect(true);
         }
+
     }
 }
