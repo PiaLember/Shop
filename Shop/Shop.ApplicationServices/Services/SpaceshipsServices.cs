@@ -38,7 +38,7 @@ namespace Shop.ApplicationServices.Services
             domain.Name = dto.Name;
             domain.Typename = dto.Typename;
             domain.SpaceshipModel = dto.SpaceshipModel;
-            domain.BuiltDate = dto.BuiltDate;
+            //domain.BuiltDate = (DateTime)dto.BuiltDate;
             domain.Crew = (int)dto.Crew;
             domain.EnginePower = (int)dto.EnginePower;
             domain.CreatedAt = dto.CreatedAt;
@@ -59,7 +59,7 @@ namespace Shop.ApplicationServices.Services
             spaceship.Name = dto.Name;
             spaceship.Typename = dto.Typename;
             spaceship.SpaceshipModel= dto.SpaceshipModel;
-            spaceship.BuiltDate = dto.BuiltDate;
+            //spaceship.BuiltDate = (DateTime)dto.BuiltDate;
             spaceship.Crew = (int)dto.Crew;
             spaceship.EnginePower = (int)dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;

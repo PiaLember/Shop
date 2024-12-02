@@ -78,10 +78,15 @@ namespace Shop.Controllers
 
             if (result == null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(new { success = false, message = "Failed to create real estate." });
             }
 
-            return RedirectToAction(nameof(Index), vm);
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                return Ok(new { success = true, id = result.Id }); // JSON response
+            }
+
+            return RedirectToAction(nameof(Index)); // Redirect for web clients
         }
 
         [HttpGet]

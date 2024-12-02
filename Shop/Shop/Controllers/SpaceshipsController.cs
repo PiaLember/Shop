@@ -62,7 +62,7 @@ namespace Shop.Controllers
                 Name = vm.Name,
                 Typename = vm.Typename,
                 SpaceshipModel = vm.SpaceshipModel,
-                BuiltDate = (DateTime)vm.BuiltDate,
+                //BuiltDate = (DateTime)vm.BuiltDate,
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower,
                 CreatedAt = vm.CreatedAt,
@@ -79,10 +79,18 @@ namespace Shop.Controllers
             var result = await _spaceshipsServices.Create(dto);
             if (result == null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(new { success = false, message = "Failed to create real estate." });
             }
-            return RedirectToAction(nameof(Index), vm);
+
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                return Ok(new { success = true, id = result.Id }); // JSON response
+            }
+
+            return RedirectToAction(nameof(Index)); // Redirect for web clients
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
@@ -139,7 +147,7 @@ namespace Shop.Controllers
             vm.Name = spaceship.Name;
             vm.Typename = spaceship.Typename;
             vm.SpaceshipModel = spaceship.SpaceshipModel;
-            vm.BuiltDate = spaceship.BuiltDate;
+            //vm.BuiltDate = spaceship.BuiltDate;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
@@ -158,7 +166,7 @@ namespace Shop.Controllers
                 Name = vm.Name,
                 Typename = vm.Typename,
                 SpaceshipModel = vm.SpaceshipModel,
-                BuiltDate = (DateTime)vm.BuiltDate,
+                //BuiltDate = (DateTime)vm.BuiltDate,
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower,
                 CreatedAt = vm.CreatedAt,
@@ -207,7 +215,7 @@ namespace Shop.Controllers
             vm.Name = spaceship.Name;
             vm.Typename = spaceship.Typename;
             vm.SpaceshipModel = spaceship.SpaceshipModel;
-            vm.BuiltDate = spaceship.BuiltDate;
+            //vm.BuiltDate = spaceship.BuiltDate;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
