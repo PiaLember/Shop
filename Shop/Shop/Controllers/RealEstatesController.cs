@@ -86,7 +86,7 @@ namespace Shop.Controllers
                 return Ok(new { success = true, id = result.Id }); // JSON response
             }
 
-            return RedirectToAction(nameof(Index)); // Redirect for web clients
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

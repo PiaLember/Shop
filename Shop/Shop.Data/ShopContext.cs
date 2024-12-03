@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Shop.Core.Domain;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -6,7 +8,7 @@ using System.Xml;
 
 namespace Shop.Data
 {
-    public class ShopContext : DbContext
+    public class ShopContext : IdentityDbContext<ApplicationUser>
 
     {
         public ShopContext(DbContextOptions<ShopContext> options)
@@ -17,5 +19,6 @@ namespace Shop.Data
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<FileToDatabase> FileToDatabases { get; set; }
         public DbSet<Kindergarten> Kindergartens { get; set; }
+        public DbSet<IdentityRole> identityRoles { get; set; }
     }
 }

@@ -69,7 +69,12 @@ namespace Shop.Controllers
             var result = await _kindergartenServices.Create(dto);
             if (result == null)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(new { success = false, message = "Failed to create kindergarten." });
+            }
+
+            if (Request.Headers["Accept"].ToString().Contains("application/json"))
+            {
+                return Ok(new { success = true, id = result.Id }); // JSON response
             }
             return RedirectToAction(nameof(Index), vm);
         }

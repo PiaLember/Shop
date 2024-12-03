@@ -79,7 +79,7 @@ namespace Shop.Controllers
             var result = await _spaceshipsServices.Create(dto);
             if (result == null)
             {
-                return BadRequest(new { success = false, message = "Failed to create real estate." });
+                return BadRequest(new { success = false, message = "Failed to create spaceship." });
             }
 
             if (Request.Headers["Accept"].ToString().Contains("application/json"))
@@ -87,7 +87,7 @@ namespace Shop.Controllers
                 return Ok(new { success = true, id = result.Id }); // JSON response
             }
 
-            return RedirectToAction(nameof(Index)); // Redirect for web clients
+            return RedirectToAction(nameof(Index));
         }
 
 
