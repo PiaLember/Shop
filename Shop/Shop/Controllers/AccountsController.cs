@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Shop.Core.Domain;
 using Shop.Data;
 using Shop.Models.Accaunts;
+using Shop.Models.Accounts;
 
 namespace Shop.Controllers
 {
@@ -73,6 +74,18 @@ namespace Shop.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(string? returnUrl)
+        {
+            LoginViewModel vm = new()
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            return View(vm);
+        }
 
     }
 }
