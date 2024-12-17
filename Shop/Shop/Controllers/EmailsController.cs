@@ -22,33 +22,14 @@ namespace Shop.Controllers
         [HttpPost]
         public IActionResult SendEmail(EmailViewModel vm, List<IFormFile> Attachments)
         {
+            var files = Request.Form.Files.Any() ? Request.Form.Files.ToList() : new List<IFormFile>();
             var dto = new EmailDto()
             {
                 To = vm.To,
                 Subject = vm.Subject,
                 Body = vm.Body,
-                AttachmentPaths = new List<string>() // Või AttachmentDto list, kui failide sisu salvestamine on vajalik
-            };
-
-            if (Attachments != null && Attachments.Count > 0)
-            {
-                var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
-
-                if (!Directory.Exists(uploadPath))
-                {
-                    Directory.CreateDirectory(uploadPath);
-                }
-
-                foreach (var file in Attachments)
-                {
-                    var filePath = Path.Combine(uploadPath, file.FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    dto.AttachmentPaths.Add(filePath);
-                }
-            }
+                Attachment = files
+            };         
 
             _emailServices.SendEmail(dto);
             return RedirectToAction(nameof(Index));

@@ -9,7 +9,7 @@ namespace Shop.Models.Accaunts
         [EmailAddress]
         //[ValidEmailDomain(allowedDomain: ".com", ErrorMessage = "Email must end with .com")]
         public string Email { get; set; }
-
+        public string Name { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }

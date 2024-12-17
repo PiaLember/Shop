@@ -3,9 +3,8 @@ using MimeKit;
 using Shop.Core.Dto;
 using Shop.Core.ServiceInterface;
 using MailKit.Net.Smtp;
-using static Org.BouncyCastle.Math.EC.ECCurve;
-using System.Net.Mail;
-using SmtpClient = MailKit.Net.Smtp.SmtpClient;
+
+
 
 
 namespace Shop.ApplicationServices.Services
@@ -14,10 +13,14 @@ namespace Shop.ApplicationServices.Services
     {
         private readonly IConfiguration _configuration;
 
-        public EmailServices(IConfiguration configuration)
+        public EmailServices
+            (
+                IConfiguration config
+            )
         {
-            _configuration = configuration;
+            _configuration = config;
         }
+
         public void SendEmail(EmailDto dto)
         {
             var email = new MimeMessage();
@@ -30,11 +33,16 @@ namespace Shop.ApplicationServices.Services
                 HtmlBody = dto.Body
             };
 
-            if (dto.AttachmentPaths != null && dto.AttachmentPaths.Any())
+            foreach (var file in dto.Attachment)
             {
-                foreach (var path in dto.AttachmentPaths)
+                if (file.Length > 0)
                 {
-                    bodyBuilder.Attachments.Add(path);
+                    using (var stream = new MemoryStream())
+                    {
+                        file.CopyTo(stream);
+                        stream.Position = 0;
+                        bodyBuilder.Attachments.Add(file.FileName, stream.ToArray());
+                    }
                 }
             }
 
@@ -50,5 +58,35 @@ namespace Shop.ApplicationServices.Services
             smtp.Disconnect(true);
         }
 
+        public void SendEmailToken(EmailTokenDto dto, string token)
+        {
+            dto.Token = token;
+            var email = new MimeMessage();
+
+            _configuration.GetSection("EmailUserName").Value = "inde999@gmail.com";
+            _configuration.GetSection("EmailHost").Value = "smtp.gmail.com";
+            _configuration.GetSection("EmailPassword").Value = "semn tnmv wosb cdwd";
+
+
+            email.From.Add(MailboxAddress.Parse(_configuration.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+            var builder = new BodyBuilder
+            {
+                HtmlBody = dto.Body,
+            };
+
+            email.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
+            //google smtp app password = GalacticTitansSMTP ucgp mjrl bdbh ilyh 
+            smtp.Connect(_configuration.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_configuration.GetSection("EmailUserName").Value, _configuration.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
+        }
     }
+
+        
+
+    
 }
