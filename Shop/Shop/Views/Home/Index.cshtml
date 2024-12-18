@@ -1,60 +1,71 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Shop.Core.Domain.ApplicationUser> signInManager;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 
-<section class="hero-section">
-    <div class="card-grid">
-        <a asp-controller="Spaceships" asp-action="Index" class="card">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/space-travel-collage-design_23-2150163738.jpg?t=st=1730451487~exp=1730455087~hmac=12de11e73d11770a1d1d62419ba813ab59b8c34c07f29a91e45414ccb43ed7da&w=996)"></div>
-            <div class="card__content">
-                <p class="card__category">Spaceships</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="RealEstates" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/night-city-background-with-reflection_1092-12.jpg?t=st=1730451721~exp=1730455321~hmac=c2ec26820c71db5d954119821ea18934351492c116460be0ef21528dab73e409&w=740)"></div>
-            <div class="card__content">
-                <p class="card__category">Real Estates</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="Kindergartens" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/balloon-twist-shaped-like-giraffe_23-2151625290.jpg?t=st=1730456267~exp=1730459867~hmac=4ffcd0b877c740406afece5de8df96f976c41a782e827275ebd1b8022907d747&w=996)"></div>
-            <div class="card__content">
-                <p class="card__category">Kindergaten</p>
-            </div>
+@if (signInManager.IsSignedIn(User))
+{
+    <section class="hero-section">
+        <div class="card-grid">
+            <a asp-controller="Spaceships" asp-action="Index" class="card">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/space-travel-collage-design_23-2150163738.jpg?t=st=1730451487~exp=1730455087~hmac=12de11e73d11770a1d1d62419ba813ab59b8c34c07f29a91e45414ccb43ed7da&w=996)"></div>
+                <div class="card__content">
+                    <p class="card__category">Spaceships</p>
+                </div>
             </a>
-        <a class="card" asp-controller="AccuWeathers" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/flat-design-monsoon-season-clouds-illustration_23-2149424294.jpg?t=st=1730808925~exp=1730812525~hmac=8629e4c113eba099f1814f5dd177f93bc8892f207b23cd8e96e0177e8c31bb35&w=996)"></div>
-            <div class="card__content">
-                <p class="card__category">Weather</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="ChuckNorris" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://pngimg.com/uploads/chuck_norris/chuck_norris_PNG19.png)"></div>
-            <div class="card__content">
-                <p class="card__category">Chuck Norris</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="FreeGames" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-psd/gaming-blank-banner-background_23-2150390425.jpg?t=st=1731424314~exp=1731427914~hmac=a30555e85f0f02565b858b0fa693c4c22e068a8d940bb70b225e92bd717e4e50&w=996)"></div>
-            <div class="card__content">
-                <p class="card__category">Free Games to Play</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="Cocktails" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/high-angle-cocktail-glasses-with-copy-space_23-2148454433.jpg?t=st=1732020162~exp=1732023762~hmac=aeab4cdd9a9e1392cd091cf6b1fc32b0e3ffacb8d93247171d9c180053578811&w=360)"></div>
-            <div class="card__content">
-                <p class="card__category">Cocktails</p>
-            </div>
-        </a>
-        <a class="card" asp-controller="Emails" asp-action="Index">
-            <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/new-message-concept-illustration_114360-666.jpg?t=st=1732522866~exp=1732526466~hmac=8fcb9d909e072c8e84993854f849506b385461beb994835f84618d6bf43df675&w=740)"></div>
-            <div class="card__content">
-                <p class="card__category">Email</p>
-            </div>
-        </a>
+            <a class="card" asp-controller="RealEstates" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/night-city-background-with-reflection_1092-12.jpg?t=st=1730451721~exp=1730455321~hmac=c2ec26820c71db5d954119821ea18934351492c116460be0ef21528dab73e409&w=740)"></div>
+                <div class="card__content">
+                    <p class="card__category">Real Estates</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="Kindergartens" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/balloon-twist-shaped-like-giraffe_23-2151625290.jpg?t=st=1730456267~exp=1730459867~hmac=4ffcd0b877c740406afece5de8df96f976c41a782e827275ebd1b8022907d747&w=996)"></div>
+                <div class="card__content">
+                    <p class="card__category">Kindergaten</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="AccuWeathers" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/flat-design-monsoon-season-clouds-illustration_23-2149424294.jpg?t=st=1730808925~exp=1730812525~hmac=8629e4c113eba099f1814f5dd177f93bc8892f207b23cd8e96e0177e8c31bb35&w=996)"></div>
+                <div class="card__content">
+                    <p class="card__category">Weather</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="ChuckNorris" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://pngimg.com/uploads/chuck_norris/chuck_norris_PNG19.png)"></div>
+                <div class="card__content">
+                    <p class="card__category">Chuck Norris</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="FreeGames" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-psd/gaming-blank-banner-background_23-2150390425.jpg?t=st=1731424314~exp=1731427914~hmac=a30555e85f0f02565b858b0fa693c4c22e068a8d940bb70b225e92bd717e4e50&w=996)"></div>
+                <div class="card__content">
+                    <p class="card__category">Free Games to Play</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="Cocktails" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-photo/high-angle-cocktail-glasses-with-copy-space_23-2148454433.jpg?t=st=1732020162~exp=1732023762~hmac=aeab4cdd9a9e1392cd091cf6b1fc32b0e3ffacb8d93247171d9c180053578811&w=360)"></div>
+                <div class="card__content">
+                    <p class="card__category">Cocktails</p>
+                </div>
+            </a>
+            <a class="card" asp-controller="Emails" asp-action="Index">
+                <div class="card__background" style="background-image: url(https://img.freepik.com/free-vector/new-message-concept-illustration_114360-666.jpg?t=st=1732522866~exp=1732526466~hmac=8fcb9d909e072c8e84993854f849506b385461beb994835f84618d6bf43df675&w=740)"></div>
+                <div class="card__content">
+                    <p class="card__category">Email</p>
+                </div>
+            </a>
 
-    </div>
-</section>
+        </div>
+    </section>
+
+}
+else
+{
+    <h1>Welcome!</h1>
+}
 
