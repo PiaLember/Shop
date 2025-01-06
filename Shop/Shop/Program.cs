@@ -5,13 +5,14 @@ using Shop.ApplicationServices.Services;
 using Shop.Core.Domain;
 using Shop.Core.ServiceInterface;
 using Shop.Data;
+using Shop.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddSignalR();
 builder.Services.AddScoped<ISpaceshipsServices, SpaceshipsServices>();
 builder.Services.AddScoped<IKindergartensServices, KindergartensServices>();
 builder.Services.AddScoped<IFileServices, FileSrevices>();
@@ -76,5 +77,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
